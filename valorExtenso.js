@@ -19,7 +19,7 @@ function vExtenso(vlr) {
             var auxnumero2;
             var auxnumero3;
 
-            var unidade = ["zero", "um", "dois", "três", "quatro", "cinco",
+            var unidade = ["", "um", "dois", "três", "quatro", "cinco",
                 "seis", "sete", "oito", "nove", "dez", "onze",
                 "doze", "treze", "quatorze", "quinze", "dezesseis",
                 "dezessete", "dezoito", "dezenove"];
