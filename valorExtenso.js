@@ -6,7 +6,7 @@ function vExtenso(vlr) {
     } else {
 
         var inteiro = parseInt(vlr); // parte inteira do valor
-        if (inteiro < 1000000000000000) {
+        if (inteiro < 1000000000000000){
 
             var resto = Num.toFixed(2) - inteiro.toFixed(2);       // parte fracionária do valor
             resto = resto.toFixed(2)
@@ -145,7 +145,10 @@ function vExtenso(vlr) {
                         }
                     }
                     if (i == 1) {
-                        if ((cont == 1) && (extenso == "um real")) {
+                        if (extenso == ""){
+                            extenso = "";
+
+                        } else if ((cont == 1) && (extenso == "um real")) {
                             extenso = extenso
                         } else {
                             if (verifica2 == 1) {
@@ -158,19 +161,31 @@ function vExtenso(vlr) {
             resto = resto * 100;
             var aexCent = 0;
             if (resto == 1) {
-                extenso += " e " + unidade[resto] + " centavo"
+                if (extenso=="") {
+                    extenso += unidade[resto] + " centavo";
+                } else {
+                    extenso += " e " + unidade[resto] + " centavos";
+                }
             }
             if (resto <= 19 && resto > 1)
-                extenso += " e " + unidade[resto] + " Centavos";
+                if (extenso=="") {
+                    extenso += unidade[resto] + " centavos";
+                } else {
+                    extenso += " e " + unidade[resto] + " centavos";
+                }
+                
             if (resto > 19) {
                 aexCent = parseInt(resto / 10);
-
-                extenso += " e " + dezena[aexCent]
+                if (inteiro == 0){
+                    
+                    extenso += dezena[aexCent]
+                } else {extenso += " e " + dezena[aexCent]}
+                
                 resto = resto - (aexCent * 10);
 
                 if (resto != 0)
-                    extenso += " e " + unidade[resto] + " Centavos";
-                else extenso += " Centavos";
+                    extenso += " e " + unidade[resto] + " centavos";
+                else extenso += " centavos";
             }
 
             valorExtenso = extenso;
@@ -180,4 +195,4 @@ function vExtenso(vlr) {
     return valorExtenso;
 }
 
-console.log(vExtenso("101"))
+console.log(vExtenso("0.45"))
