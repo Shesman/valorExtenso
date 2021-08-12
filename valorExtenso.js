@@ -6,9 +6,9 @@ function vExtenso(vlr) {
     } else {
 
         var inteiro = parseInt(vlr); // parte inteira do valor
-        if (inteiro < 1000000000000000){
+        if (inteiro < 1000000000000000) {
 
-            var resto = Num.toFixed(2) - inteiro.toFixed(2);       // parte fracionária do valor
+            var resto = Num.toFixed(2) - inteiro.toFixed(2);       // parte decimal do valor
             resto = resto.toFixed(2)
 
             var vlrS = inteiro.toString();
@@ -54,7 +54,7 @@ function vExtenso(vlr) {
                 }
 
                 if ((i == 15) || (i == 12) || (i == 9) || (i == 6) || (i == 3)) {
-                   
+
                     if ((auxnumero == 1) && (aux == "00")) {
 
                         extenso = extenso + "Cem";
@@ -70,7 +70,7 @@ function vExtenso(vlr) {
                         auxnumero3 = vlrS.substr(cont - i + 2, 1)
 
                         if ((auxnumero2 != "0") || (auxnumero3 != "0"))
-                            extenso += " e ";
+                            extenso += ", ";
                     }
 
 
@@ -84,9 +84,9 @@ function vExtenso(vlr) {
 
                         if ((auxnumero3 != "0") && (auxnumero2 != "1"))
                             extenso += " e ";
-                    }
-                    else if ((auxnumero <= 19) && (auxnumero > 9) && ((i == 14) || (i == 11) || (i == 8) || (i == 5) || (i == 2))) {
+                    } else if ((auxnumero <= 19) && (auxnumero > 9) && ((i == 14) || (i == 11) || (i == 8) || (i == 5) || (i == 2))) {
                         extenso = extenso + unidade[auxnumero];
+                        i--; //para nao entrar na unidade quando tiver entre 10 e 19
                     } else if ((auxnumero < 10) && ((i == 13) || (i == 10) || (i == 7) || (i == 4) || (i == 1))) {
                         auxnumero3 = vlrS.substr(cont - i, 1);
                         // console.log(auxnumero3);
@@ -111,7 +111,6 @@ function vExtenso(vlr) {
                     verifica3 = cont - i;
                     if (verifica3 == 0)
                         verifica1 = vlrS.substr(cont - i, 1);
-
                     if (verifica3 == 1)
                         verifica1 = vlrS.substr(cont - i - 1, 2);
 
@@ -133,6 +132,7 @@ function vExtenso(vlr) {
                     if (i == 7) {
                         if (verifica2 == 1) {
                             extenso = extenso + " " + qualificaS[2] + " ";
+
                         } else if (verifica2 != 0) { extenso = extenso + " " + qualificaP[2] + " "; }
                     }
                     if (i == 4) {
@@ -145,7 +145,8 @@ function vExtenso(vlr) {
                         }
                     }
                     if (i == 1) {
-                        if (extenso == ""){
+                        
+                        if (extenso == "") {
                             extenso = "";
 
                         } else if ((cont == 1) && (extenso == "um real")) {
@@ -159,28 +160,31 @@ function vExtenso(vlr) {
                 }
             }
             resto = resto * 100;
+            resto = parseInt(resto)
             var aexCent = 0;
             if (resto == 1) {
-                if (extenso=="") {
+                if (extenso == "") {
                     extenso += unidade[resto] + " centavo";
                 } else {
-                    extenso += " e " + unidade[resto] + " centavos";
+                    extenso += " e " + unidade[resto] + " centavo";
                 }
             }
             if (resto <= 19 && resto > 1)
-                if (extenso=="") {
+                
+                if (extenso == "") {
                     extenso += unidade[resto] + " centavos";
                 } else {
                     extenso += " e " + unidade[resto] + " centavos";
+                    console.log(resto)
                 }
-                
+
             if (resto > 19) {
                 aexCent = parseInt(resto / 10);
-                if (inteiro == 0){
-                    
+                if (inteiro == 0) {
+
                     extenso += dezena[aexCent]
-                } else {extenso += " e " + dezena[aexCent]}
-                
+                } else { extenso += " e " + dezena[aexCent] }
+
                 resto = resto - (aexCent * 10);
 
                 if (resto != 0)
@@ -195,4 +199,4 @@ function vExtenso(vlr) {
     return valorExtenso;
 }
 
-console.log(vExtenso("0.45"))
+console.log(vExtenso("14014014.14"))
